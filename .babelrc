@@ -2,10 +2,10 @@
   "presets": [
     ["@babel/preset-env", {
       "targets": {
-        "browsers": ["> 0.25%", "ie >= 11"]  
+        "browsers": ["> 0.25%", "ie >= 11"]  // Support old browsers like IE11
       },
-      "useBuiltIns": "usage",  
-      "corejs": 3  
+      "useBuiltIns": "usage",  // Auto-include polyfills only where used (e.g., Array.from, Promise)
+      "corejs": 3  // Use core-js@3 for polyfills (Array.from, Promise, etc.)
     }]
   ]
 }

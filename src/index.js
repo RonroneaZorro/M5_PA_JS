@@ -1,14 +1,14 @@
-// ES6+ Features Used:
-// - const/let
-// - Arrow functions (with default params)
+// Carácteristicas de ES6+:
+// - Variables: const/let
+// - Fúncion flecha: => arrow function
 // - Template literals
-// - Destructuring (object and array)
-// - Spread/rest operators
-// - Map (for unique addresses and summing)
-// - async/await with Promises (simulate data load)
-// - Array.from (with polyfill for old browsers)
+// - Destructuring (objetos y array)
+// - Spread/rest manipulación de datos
+// - Map gestión de datos
+// - async/await y promesas para simular carga asíncrona (de datos)
+// - Polyfill con función Array.from 
 
-const entregas = [  // Initial data (could be from JSON)
+const entregas = [  // Datos iniciales (se podría importar de un JSON)
   { direccion: "Av. Siempre Viva 742", paquetes: 4 },
   { direccion: "Calle Falsa 123", paquetes: 2 },
   { direccion: "Av. Siempre Viva 742", paquetes: 3 },
@@ -16,70 +16,72 @@ const entregas = [  // Initial data (could be from JSON)
   { direccion: "Calle Falsa 123", paquetes: 1 }
 ];
 
-// Simulate async data loading (e.g., from JSON file) using Promise
+// Carga de datos usando una promesa
 const loadData = () => {
   return new Promise((resolve) => {
-    // Simulate delay for file/JSON load
     setTimeout(() => resolve(entregas), 500);
   });
 };
 
-// Process deliveries: remove duplicates, sum packages, sort by priority
+// Función de flecha para procesar y generar el reporte
 const processDeliveries = async () => {
   const data = await loadData();  // async/await
 
-  // Use Map to manage unique addresses and sum packages (rest operator for loop if needed)
+  // Map para filtrar y contar paquetes
   const deliveryMap = new Map();
-  data.forEach(({ direccion, paquetes }) => {  // Destructuring in forEach
-    const currentPaquetes = deliveryMap.get(direccion) || 0;  // Default via || (ES6 style)
+  data.forEach(({ direccion, paquetes }) => {  
+    const currentPaquetes = deliveryMap.get(direccion) || 0;  
     deliveryMap.set(direccion, currentPaquetes + paquetes);
   });
 
-  // Convert Map to array using Array.from (polyfilled)
-  let processed = Array.from(deliveryMap, ([direccion, paquetes]) => ({  // Destructuring array
+  // Convertir Map a array usando Array.from (polyfilled)
+  let processed = Array.from(deliveryMap, ([direccion, paquetes]) => ({ 
     direccion,
     paquetes
   }));
 
-  // Sort descending by paquetes (priority: more packages first)
-  processed = [...processed].sort((a, b) => b.paquetes - a.paquetes);  // Spread to create new array
+  // Se ordena el array de mayor a menor (por cantidad de paquetes)
+  processed = [...processed].sort((a, b) => b.paquetes - a.paquetes);
 
   return processed;
 };
 
-// Generate report using template literals (arrow function with default param)
-const generateReport = (deliveries, companyName = 'ExpressGo') => {  // Arrow with default
-  let report = `=== Reporte de Rutas Optimizadas para ${companyName} ===\n\n`;
+// Se genera el reporte usando template literals
+const generateReport = (deliveries, companyName = 'ExpressGo') => { 
+  let report = `
+  ========================================================
+        === Reporte de Rutas de ${companyName} ===
+  ========================================================\n
+  Rutas priorizadas por cantidad de paquetes:\n\n`;
   report += 'Prioridad | Dirección'.padEnd(40) + '| Paquetes\n';
   report += ''.padEnd(40, '-') + '\n';
 
-  // Use reduce with template literals and destructuring (spread for iteration if needed)
-  const lines = deliveries.reduce((acc, { direccion, paquetes }, index) => {  // Destructuring
+  const lines = deliveries.reduce((acc, { direccion, paquetes }, index) => { 
     const priority = index + 1;
     acc.push(`${priority.toString().padStart(8)} | ${direccion.padEnd(25)} | ${paquetes}\n`);
     return acc;
   }, []);
 
-  report += lines.join('');  // Join array of template strings
+  report += lines.join(''); 
   report += `\nTotal de rutas únicas: ${deliveries.length}`;
   return report;
 };
 
-// Main function to process and generate report
+// Función para procesar y generar el reporte
 const processAndReport = async () => {
   try {
     const processedDeliveries = await processDeliveries();
     const report = generateReport(processedDeliveries);
-    console.log(report);  // Output to console (or DOM in browser)
+    console.log(report); 
   } catch (error) {
     console.error('Error procesando entregas:', error);
   }
 };
 
-// Export for module use (ES6 modules, but Webpack handles)
+// Exporta la función si se ejecuta directamente
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { processAndReport };
 }
 
-// Auto-run in browser/Node
+// Procesa y genera el reporte cuando se ejecuta directamente
 processAndReport();
