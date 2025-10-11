@@ -1,0 +1,24 @@
+# Directorios de dependencias
+node_modules/
+
+# Directorios de salida de compilación
+dist/
+
+# Archivos de registro
+npm-debug.log*
+npm-error.log*
+
+# Archivos de depuración y temporales
+.DS_Store
+*.log
+*.tmp
+
+# Archivos de configuración de editores (opcional)
+.vscode/
+.idea/
+
+# Archivos de entorno (opcional, pero recomendado para proyectos futuros)
+.env
+.env.local
+.env.development
+.env.production
