@@ -8,7 +8,7 @@ Este proyecto implementa un algoritmo en JavaScript moderno (ES6+) para resolver
 - Procesamiento de listas, eliminando duplicados y consolida un paquete
 - Ordena la lista con prioridad: Mayor cantidad de paquetes
 - Genera un reporte visual en pantalla (Consola del desarrollador)
-- compatible con navegadores modernos como antiguos, utilizando herramientas de desarrollo estándar **Webpack** y **Babel**
+- Compatible con navegadores modernos como antiguos, utilizando herramientas de desarrollo estándar **Webpack** y **Babel**
 
 ## Requerimientos Cumplidos
 
