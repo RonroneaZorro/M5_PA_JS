@@ -1,4 +1,4 @@
-# ICONO + TITULO (📚 Funciones Asíncrona en JavaScript)
+# 📚 Funciones Asíncrona en JavaScript
 
 ## Descripción del Proyecto
 
@@ -9,12 +9,6 @@ La actividad se divide en 3 conceptos fundamentales:
 - Uso de Callbacks.
 - Uso de Promesas
 - Uso de Async/Await
-
-## Características
-- Procesamiento de listas, eliminando duplicados y consolida un paquete
-- Ordena la lista con prioridad: Mayor cantidad de paquetes
-- Genera un reporte visual en pantalla (Consola del desarrollador)
-- Compatible con navegadores modernos como antiguos, utilizando herramientas de desarrollo estándar **Webpack** y **Babel**
 
 ---
 
